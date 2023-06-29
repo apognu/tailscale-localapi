@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "tailscale_localapi"
+version = "0.1.0"
+description = "Control Tailscale's local socket API"
+authors = ["Antoine POPINEAU <antoine@popineau.eu>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "tailscale_localapi"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+urllib3 = "1.26.16"
+requests = "2.29.0"
+
+[tool.poetry.dev-dependencies]
+black = "^22.3.0"
+pdoc3 = "^0.10.0"
+
+[tool.black]
+line-length = 200
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
