@@ -1,4 +1,5 @@
 /.vscode/
 /examples
+/dist
 
 __pycache__/
