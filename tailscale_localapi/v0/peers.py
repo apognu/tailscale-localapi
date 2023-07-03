@@ -1,4 +1,5 @@
 from requests import Session
+from requests.exceptions import ConnectionError
 from typing import List
 
 from tailscale_localapi._util.error import TailscaleException
@@ -55,21 +56,27 @@ class Self:
 
     @classmethod
     def status(cls, client: Session):
-        response = client.get("http://ts/localapi/v0/status")
+        try:
+            response = client.get("http://ts/localapi/v0/status")
 
-        if response.status_code != 200:
-            raise TailscaleException(f"api error ({response.status_code}): {response.text}")
+            if response.status_code != 200:
+                raise TailscaleException.from_status_code(response.status_code, response.text)
 
-        return Self.from_json(response.json())
+            return Self.from_json(response.json())
+        except ConnectionError:
+            raise TailscaleException.connection_error()
 
     @classmethod
     def peers(cls, client: Session):
-        response = client.get("http://ts/localapi/v0/status")
+        try:
+            response = client.get("http://ts/localapi/v0/status")
 
-        if response.status_code != 200:
-            raise TailscaleException(f"api error ({response.status_code}): {response.text}")
+            if response.status_code != 200:
+                raise TailscaleException.from_status_code(response.status_code, response.text)
 
-        return Peers.from_json(response.json())
+            return Peers.from_json(response.json())
+        except ConnectionError:
+            raise TailscaleException.connection_error()
 
 
 class Peers:

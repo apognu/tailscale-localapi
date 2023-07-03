@@ -60,7 +60,7 @@ class Config:
         response = client.get("http://ts/localapi/v0/prefs")
 
         if response.status_code != 200:
-            raise TailscaleException(f"api error ({response.status_code}): {response.text}")
+            raise TailscaleException.from_status_code(response.status_code, response.text)
 
         return Config.from_json(response.json())
 
@@ -74,4 +74,4 @@ class Config:
         response = client.patch("http://ts/localapi/v0/prefs", data=json.dumps(body))
 
         if response.status_code != 200:
-            raise TailscaleException(f"api error ({response.status_code}): {response.text}")
+            raise TailscaleException.from_status_code(response.status_code, response.text)

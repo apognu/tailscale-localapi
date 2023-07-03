@@ -3,9 +3,9 @@ import requests
 from typing import List, Optional
 
 from tailscale_localapi.v0.config import Config
-from tailscale_localapi.v0.peers import Self, Peers, Peer
-from tailscale_localapi._util.error import TailscaleException
+from tailscale_localapi.v0.peers import Self, Peer
 from tailscale_localapi._util.sock import SockAdapter
+from tailscale_localapi._util.error import TailscaleException
 
 
 class API_V0:
@@ -107,9 +107,9 @@ class API_V0:
             peer = self.peer(hostname)
 
             if peer is None:
-                raise TailscaleException(f"host `{hostname}` not found on the tailnet")
+                raise TailscaleException.other(f"host `{hostname}` not found on the tailnet")
             if not peer.can_be_exit_node:
-                raise TailscaleException(f"host `{hostname}` cannot be used as an exit node")
+                raise TailscaleException.other(f"host `{hostname}` cannot be used as an exit node")
 
             exit_node_id = peer.id
 
