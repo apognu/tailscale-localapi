@@ -88,7 +88,7 @@ class API_V0:
 
         return Config.get(self._client)
 
-    def set_exit_node(self, hostname: Optional[str]) -> None:
+    def set_exit_node(self, hostname: Optional[str], allow_lan: bool = False) -> None:
         """
         Enables routing through an exit node through its hostname.
 
@@ -114,6 +114,7 @@ class API_V0:
             exit_node_id = peer.id
 
         Config.set_preference(self._client, "ExitNodeID", exit_node_id)
+        Config.set_preference(self._client, "ExitNodeAllowLANAccess", allow_lan)
 
     def unset_exit_node(self):
         """Disables routing through the exit node."""
