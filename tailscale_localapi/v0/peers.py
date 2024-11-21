@@ -57,7 +57,7 @@ class Self:
     @classmethod
     def status(cls, client: Session):
         try:
-            response = client.get("http://ts/localapi/v0/status")
+            response = client.get("http://local-tailscaled.sock/localapi/v0/status")
 
             if response.status_code != 200:
                 raise TailscaleException.from_status_code(response.status_code, response.text)
@@ -69,7 +69,7 @@ class Self:
     @classmethod
     def peers(cls, client: Session):
         try:
-            response = client.get("http://ts/localapi/v0/status")
+            response = client.get("http://local-tailscaled.sock/localapi/v0/status")
 
             if response.status_code != 200:
                 raise TailscaleException.from_status_code(response.status_code, response.text)

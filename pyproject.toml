@@ -1,11 +1,11 @@
 [tool.poetry]
 name = "tailscale_localapi"
-version = "0.3.0"
+version = "0.5.0"
 description = "Control Tailscale's local socket API"
 authors = ["Antoine POPINEAU <antoine@popineau.eu>"]
 license = "MIT"
 readme = "README.md"
-packages = [{include = "tailscale_localapi"}]
+packages = [{ include = "tailscale_localapi" }]
 
 [tool.poetry.dependencies]
 python = "^3.10"

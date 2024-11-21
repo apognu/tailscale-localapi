@@ -20,7 +20,7 @@ class API_V0:
         `tailscaled` UNIX socket.
         """
 
-        self._client.mount("http://ts/", SockAdapter())
+        self._client.mount("http://local-tailscaled.sock/", SockAdapter())
         self._socket_path = socket_path
 
     def is_connected(self) -> bool:

@@ -57,7 +57,7 @@ class Config:
 
     @classmethod
     def get(cls, client: Session):
-        response = client.get("http://ts/localapi/v0/prefs")
+        response = client.get("http://local-tailscaled.sock/localapi/v0/prefs")
 
         if response.status_code != 200:
             raise TailscaleException.from_status_code(response.status_code, response.text)
@@ -71,7 +71,7 @@ class Config:
             key: value,
         }
 
-        response = client.patch("http://ts/localapi/v0/prefs", data=json.dumps(body))
+        response = client.patch("http://local-tailscaled.sock/localapi/v0/prefs", data=json.dumps(body))
 
         if response.status_code != 200:
             raise TailscaleException.from_status_code(response.status_code, response.text)
